@@ -30,6 +30,7 @@ const OTPVerificationPage = () => {
   const [isDragging, setIsDragging] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
   const containerRef = useRef(null);
+  const isSubmittingRef = useRef(false); // Add ref to prevent multiple submissions
 
   // Get URL parameters
   const getUrlParams = () => {
@@ -118,32 +119,32 @@ const OTPVerificationPage = () => {
 
   // Slide to confirm handlers
   const handleMouseDown = (e) => {
-    if (isConfirmed || loading) return;
+    if (isConfirmed || loading || isSubmittingRef.current) return;
     setIsDragging(true);
   };
 
   const handleTouchStart = (e) => {
-    if (isConfirmed || loading) return;
+    if (isConfirmed || loading || isSubmittingRef.current) return;
     setIsDragging(true);
   };
 
-const handleMove = (clientX) => {
-  if (!isDragging || !containerRef.current || isConfirmed || loading) return;
+  const handleMove = (clientX) => {
+    if (!isDragging || !containerRef.current || isConfirmed || loading || isSubmittingRef.current) return;
 
-  const containerRect = containerRef.current.getBoundingClientRect();
-  const maxSlide = containerRect.width - 60;
-  const newPosition = Math.min(Math.max(0, clientX - containerRect.left - 30), maxSlide);
+    const containerRect = containerRef.current.getBoundingClientRect();
+    const maxSlide = containerRect.width - 60;
+    const newPosition = Math.min(Math.max(0, clientX - containerRect.left - 30), maxSlide);
 
-  setSlidePosition(newPosition);
+    setSlidePosition(newPosition);
 
-  if (newPosition >= maxSlide * 0.9) {
-    // Immediately stop dragging and lock the state
-    setIsDragging(false);
-    setIsConfirmed(true);
-    handleSubmit();
-  }
-};
-
+    if (newPosition >= maxSlide * 0.9) {
+      // Immediately lock with ref to prevent multiple calls
+      isSubmittingRef.current = true;
+      setIsDragging(false);
+      setIsConfirmed(true);
+      handleSubmit();
+    }
+  };
 
   const handleMouseMove = (e) => {
     handleMove(e.clientX);
@@ -156,7 +157,7 @@ const handleMove = (clientX) => {
   };
 
   const handleEnd = () => {
-    if (!isConfirmed) {
+    if (!isConfirmed && !isSubmittingRef.current) {
       setSlidePosition(0);
     }
     setIsDragging(false);
@@ -179,87 +180,81 @@ const handleMove = (clientX) => {
   }, [isDragging, slidePosition, isConfirmed]);
 
   // Validate and submit OTP (triggered by slide)
- const handleSubmit = async () => {
-  if (isConfirmed || loading) return;
+  const handleSubmit = async () => {
+    if (isSubmittingRef.current && loading) return; // Double-check with ref
 
+    setLoading(true);
 
-  setIsConfirmed(true);
-  setIsDragging(false);
-  setLoading(true);
+    const otpString = otp.join('');
+    const { bookingId } = getUrlParams();
 
-  const otpString = otp.join('');
-  const { bookingId } = getUrlParams();
-
-  if (otpString.length !== 4) {
-    toast.error('Verification Failed.');
-    setSlidePosition(0);
-
-    //  reset so user can retry
-    setIsConfirmed(false);
-    setLoading(false);
-    return;
-  }
-
-  try {
-    const response = await fetch(`${API_URL}/api/helpers/validateOtp`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        str2: otpString,
-        booking_id: bookingId,
-        verify_otp_url: bookingData.verifyOtpUrl
-      })
-    });
-
-    const result = await response.json();
-
-    if (!result.status && result.message === "error") {
-      toast.error('Something Went Wrong Please Try Again Later!');
+    if (otpString.length !== 4) {
+      toast.error('Verification Failed.');
       resetSlider();
-    } 
-    else if (!result.status && result.message === "other_confirmed") {
-      toast('Unfortunately, the time slot has already been booked...', {
-        icon: '⚠️',
-        duration: 8000,
-        style: {
-          background: '#FEF3C7',
-          color: '#92400E',
-          border: '1px solid #F59E0B',
-          maxWidth: '500px',
-        }
-      });
-      setTimeout(() => {
-        window.location.reload();
-      }, 8000);
-    } 
-    else if (!result.status && result.message === "fail") {
-      toast.error('Verification Failed!');
-      resetSlider();
-    } 
-    else if (result.status) {
-      toast.success('Booking Confirmed Successfully');
-      setTimeout(() => {
-        window.location.href = `/booking_details/${result.bookingId}`;
-      }, 1000);
-    } 
-    else {
-      toast.error('Something Went Wrong Please Try Again Later!');
-      resetSlider();
+      setLoading(false);
+      return;
     }
 
-  } catch (error) {
-    console.error('Error validating OTP:', error);
-    toast.error('Something Went Wrong Please Try Again Later!');
-    resetSlider();
-  } finally {
-    setLoading(false);
-  }
-};
+    try {
+      const response = await fetch(`${API_URL}/api/helpers/validateOtp`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          str2: otpString,
+          booking_id: bookingId,
+          verify_otp_url: bookingData.verifyOtpUrl
+        })
+      });
 
+      const result = await response.json();
+
+      if (!result.status && result.message === "error") {
+        toast.error('Something Went Wrong Please Try Again Later!');
+        resetSlider();
+      } 
+      else if (!result.status && result.message === "other_confirmed") {
+        toast('Unfortunately, the time slot has already been booked...', {
+          icon: '⚠️',
+          duration: 8000,
+          style: {
+            background: '#FEF3C7',
+            color: '#92400E',
+            border: '1px solid #F59E0B',
+            maxWidth: '500px',
+          }
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 8000);
+      } 
+      else if (!result.status && result.message === "fail") {
+        toast.error('Verification Failed!');
+        resetSlider();
+      } 
+      else if (result.status) {
+        toast.success('Booking Confirmed Successfully');
+        setTimeout(() => {
+          window.location.href = `/booking_details/${result.bookingId}`;
+        }, 1000);
+      } 
+      else {
+        toast.error('Something Went Wrong Please Try Again Later!');
+        resetSlider();
+      }
+
+    } catch (error) {
+      console.error('Error validating OTP:', error);
+      toast.error('Something Went Wrong Please Try Again Later!');
+      resetSlider();
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const resetSlider = () => {
+    isSubmittingRef.current = false;
     setIsConfirmed(false);
     setSlidePosition(0);
   };
