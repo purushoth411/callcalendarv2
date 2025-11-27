@@ -1,0 +1,638 @@
+#root {
+  max-width: 100%;
+}
+
+/* Primary Theme Color */
+:root {
+  --prime-color: #fa713b;
+  --prime-hover: #e15c27;
+  --prime-light: #ffe3d9;
+
+  /* Secondary Theme Color */
+  --secondary-color: #224d68;
+}
+
+/* Custom Button */
+.btn-prime {
+  background-color: var(--prime-color);
+  color: #fff;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-prime:hover {
+  background-color: var(--prime-hover);
+  color: #fff;
+}
+
+/* Outline version */
+.btn-prime-outline {
+  border: 2px solid var(--prime-color);
+  background: transparent;
+  color: var(--prime-color);
+}
+
+.btn-prime-outline:hover {
+  background-color: var(--prime-color);
+  color: #fff;
+}
+
+/* Badge */
+.prime-bdg {
+  background-color: var(--prime-color);
+  color: #fff;
+  padding: 0.35em 0.6em;
+  border-radius: 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* Background utility */
+.prime-bg {
+  background-color: var(--prime-color) !important;
+  color: #fff;
+}
+
+/* Text color */
+.prime-text {
+  color: var(--prime-color) !important;
+}
+
+/* Border */
+.prime-border {
+  border: 1px solid var(--prime-color);
+}
+
+.btn-secondary {
+  background-color: var(--secondary-color);
+  color: #fff;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: var(--secondary-hover);
+  color: #fff;
+}
+
+.secondary-bg {
+  background-color: var(--secondary-color) !important;
+  color: #fff;
+}
+
+/* === NEW: Secondary navbar background === */
+.navbar-bg {
+  background-color: var(--secondary-color);
+  color: #fff;
+}
+
+a {
+  text-decoration: none !important;
+  cursor: pointer;
+}
+button{
+  cursor: pointer;
+}
+
+/* Datatable Style */
+/* .dataTables_wrapper {
+  font-family: inherit;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+  margin-left: 0.5rem;
+}
+
+.dataTables_wrapper .dataTables_length select {
+  margin: 0 0.5rem;
+}
+
+.dataTables_wrapper .dataTables_info {
+  padding-top: 0;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+  padding-top: 0;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  padding: 0.5rem 0.75rem;
+  margin: 0 0.125rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  background: white;
+  color: #374151;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+  background: #f9fafb;
+  border-color: #9ca3af;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+  background: #3b82f6;
+  border-color: #3b82f6;
+  color: white;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+table.dataTable thead th {
+  background: #f9fafb;
+  border-bottom: 2px solid #e5e7eb;
+  color: #374151;
+  font-weight: 600;
+  padding: 1rem;
+}
+
+table.dataTable tbody td {
+  padding: 1rem;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+table.dataTable tbody tr:hover {
+  background: #f8fafc;
+} */
+/* ////////////////////// */
+
+/* From Uiverse.io by Galahhad */
+.custom-checkbox {
+  display: none;
+}
+
+.custom-slider {
+  width: 35px;
+  height: 15px;
+  background-color: lightgray;
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  border: 2px solid transparent;
+  transition: 0.3s;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  position: relative;
+}
+
+.custom-slider::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  transform: translateX(-20px);
+  border-radius: 20px;
+  transition: 0.3s;
+  box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.25);
+}
+
+.custom-checkbox:checked~.custom-slider::before {
+  transform: translateX(20px);
+}
+
+.custom-checkbox:checked~.custom-slider {
+  background-color: #28a745;
+}
+
+.custom-checkbox:active~.custom-slider::before {
+  transform: translate(0);
+}
+
+
+
+
+/* //////////calendar style */
+/* Override FullCalendar's default look */
+.fc .fc-toolbar-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.fc .fc-button {
+  background-color: #3b82f6;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  border-radius: 0.375rem;
+  transition: background 0.3s;
+}
+
+.fc .fc-button:hover {
+  background-color: #2563eb;
+}
+
+.fc .fc-daygrid-day-number {
+  color: #1f2937;
+  font-weight: 500;
+}
+
+.fc .fc-event {
+  background-color: #10b981;
+  border: none;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  padding: 2px 4px;
+}
+
+.fc .fc-button {
+  background-color: var(--secondary-color);
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 6px;
+}
+
+.fc .fc-button:hover {
+  background-color: var(--prime-hover);
+}
+
+/* Calendar Title */
+.fc .fc-toolbar-title {
+  color: var(--secondary-color);
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+/* Sunday text styling (for safety - double coverage) */
+.fc-day-sun {
+  background-color: var(--prime-light);
+  color: var(--prime-color);
+}
+
+/* Selected date styling (optional, double coverage) */
+.fc-daygrid-day.fc-day-today {
+  border: 2px solid var(--prime-color);
+}
+
+/* ////////////callendar style  */
+
+.f-11 {
+  font-size: 11px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* -------------------------------------------- */
+
+.overflow-y-auto::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #F5F5F5;
+}
+
+.overflow-y-auto::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  background-color: #F5F5F5;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb {
+  background-color: #224d68;
+  border: 2px solid #224d68;
+}
+
+
+
+
+
+
+
+
+.n-table-set thead th {
+  border-left: 1px solid #6a6a6a;
+}
+
+.n-table-set thead {
+  background: #224d68;
+  color: #fff;
+  border: 1px solid #6a6a6a;
+  white-space: nowrap;
+}
+
+.dt-column-order {
+  position: sticky !important;
+}
+
+.dt-orderable-asc {
+  padding: 5px 10px !important;
+}
+
+
+div.dt-container .dt-paging .dt-paging-button {
+  padding: 3px 10px;
+}
+
+
+
+
+body{
+  font-family: "Noto Sans", sans-serif;
+}
+
+.react-datepicker-wrapper {
+    width: 100%;
+}
+
+
+
+table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
+    background-color: #ecf7ff !important;
+}
+table.dataTable.stripe>tbody>tr:nth-child(odd)>*, table.dataTable.display>tbody>tr:nth-child(odd)>* {
+    background: #fff !important;
+}
+
+
+
+
+/* style all rows */
+.dataTable tbody tr {
+  background-color: #fff;   /* default white */
+  transition: background 0.2s ease-in-out;
+  border: 1px solid #ccc !important;
+}
+
+/* alternate row colors */
+.dataTable tbody tr:nth-child(even) {
+  background-color: #fff; /* light gray */
+}
+
+/* hover effect */
+.dataTable tbody tr:hover {
+  background-color: unset; /* soft orange */
+  /* cursor: pointer; */
+}
+
+.dataTable tbody td {
+  border-bottom: 1px solid #ccc !important;
+}
+.dataTable tbody tr {
+  border-bottom: 1px solid #ccc !important;
+}
+
+
+.react-datepicker-popper {
+    z-index: 999 !important;
+}
+
+
+
+/* ============================================== monish start*/
+
+.the-table-set thead th {
+  border-right: 1px solid #e2d9d9;
+}
+.the-table-set thead th:last-child {
+  border-right: 0px solid #e2d9d9;
+}
+.the-table-set tbody td {
+    border-right: 1px solid #ccc  !important;
+}
+.the-table-set tbody td:last-child {
+    border-right: 0px solid #ccc  !important;
+}
+
+.the-table-set thead {
+  background: #224d68;
+  color: #fff;
+  border: 1px solid #6a6a6a;
+  white-space: nowrap;
+}
+
+.the-table-set thead tr th:last-of-type {
+  /* background: red; */
+  width: 24%;
+}
+
+/* .text-blue-600 {
+  color: var(--color-gray-900);
+  text-decoration: none;
+} */
+
+/* table.dataTable.display tbody tr td:first-child {
+  box-shadow: inset 0 0 0 9999px rgba(var(--dt-column-ordering), 0.019);
+} */
+
+/* table.dataTable.display tbody tr td:last-child {
+  line-height: 30px;
+} */
+
+/* table.dataTable.display tbody tr td:last-child span {
+  border: 1px solid;
+  padding: 2px 6px;
+} */
+
+/* table.dataTable.display tbody tr td:last-child a {
+  border: 1px solid;
+  padding: 4px 4px;
+  margin-left: 7px;
+  margin-right: 7px;
+} */
+
+/* table.dataTable.display tbody tr td:last-child a:hover {
+  border: 1px solid var(--color-green-800);
+  padding: 4px 4px;
+  color: #fff;
+  background-color: var(--color-green-800);
+} */
+
+/* table.dataTable tbody tr:nth-child(odd) {
+  background-color: transparent;
+} */
+
+.show-history-btn {
+  padding: 2px 4px;
+  /* background-color: #ffffff7d; */
+  cursor: pointer;
+  /* border: 1px solid #b4b4b47d; */
+}
+
+.show-history-btn:hover {
+  padding: 2px 4px;
+  background-color: #fff;
+  cursor: pointer;
+  /* border: 1px solid #b4b4b47d; */
+}
+
+.overflow-x-auto::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #F5F5F5;
+}
+
+.overflow-x-auto::-webkit-scrollbar {
+  height: 5px;
+  background-color: #F5F5F5;
+}
+
+.overflow-x-auto::-webkit-scrollbar-thumb {
+  background-color: #224d68;
+  border: 2px solid #224d68;
+}
+
+
+
+
+
+.the_extra thead th {
+  border-left: 1px solid #6a6a6a;
+}
+
+.the_extra thead {
+  background: #224d68;
+  color: #fff;
+  border: 1px solid #6a6a6a;
+}
+
+table.the_extra.display tbody tr td:last-child span {
+  border: 0px solid;
+  padding: 2px 6px;
+}
+
+
+.the_request thead th {
+  border-left: 1px solid #6a6a6a;
+}
+
+.the_request thead {
+  background: #224d68;
+  color: #fff;
+  border: 1px solid #6a6a6a;
+}
+
+
+
+
+.the_request thead tr th:nth-child(2) {
+  width: 10%;
+  text-align: left;
+}
+
+.the_request thead tr td{
+  font-size: 13px;
+}
+
+.the_request thead tr th:first-of-type {
+  width: 7%;
+  text-align: left;
+}
+
+table.the_request.display tbody tr td:first-child {
+  text-align: left;
+}
+
+table.the_request.display tbody tr td:last-child span {
+  border: 0px solid;
+  padding: 1px 4px 3px;
+}
+
+.the_filter{
+     border: 1px solid #ddd;
+    margin: 12px 13px;
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.clip-left-arrow {
+  clip-path: polygon(100% 0, 100% 0, 0 50%, 100% 100%, 100% 100%, 100% 50%);
+      position: relative;
+    transform: rotate(90deg);
+    right: -54%;
+    top: -13px;
+}
+
+.the_tcn{
+  padding: 1px 3px;
+}
+
+.the_left p{
+padding-left: 23px;
+}
+
+.the_rbac{
+      position: relative;
+    z-index: 1;
+        margin-left: -15%;
+}
+
+.the_rever{
+          top: -67px;
+    left: 5%;
+    width: 78%;
+    position: relative;
+}
+
+.the_line{
+      background: #6a7282;
+    z-index: 0;
+  top: 20px;
+    left: 8px;
+    width: 2px;
+}
+
+.the_line1{
+  z-index: 1;
+  width: 17px;
+  height: 17px;
+  background-color: var(--color-gray-500);
+  border-radius: 20px;
+}
+
+.the_line2{
+  width: 8px;
+  height: 8px;
+  background-color: #fff;
+  border-radius: 20px;
+}
+table.n-table-set th.dt-type-numeric, table.dataTable th.dt-type-date, table.dataTable td.dt-type-numeric, table.dataTable td.dt-type-date{
+  text-align: left;
+}
+
+.the_addcall{
+  padding: 2px 4px;
+  line-height: 16px;
+}
+
+.the_addcall1{
+   padding: 2px 4px 4px;
+  line-height: 16px;
+}
+
+.the_act
+{
+      padding: 2px 6px;
+      font-size: 11px;
+}
+
+.the_break{
+
+  width: 100%;
+    white-space: break-spaces;
+    word-break: break-all;
+}
+.the_status{
+  box-shadow: none;
+  padding: 2px 1px;
+  font-size: 12px;
+  
+}
+
+
+/* ============================================== monish end */
