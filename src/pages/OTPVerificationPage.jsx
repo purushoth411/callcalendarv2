@@ -486,12 +486,12 @@ const OTPVerificationPage = () => {
             <div className="lg:w-1/3">
               <div className="bg-white rounded-lg shadow-lg p-6">
                 <div className="text-center">
-                  <h2 className="text-xl text-gray-800 mb-4 font-semibold">
+                  <h2 className="text-xl text-gray-800 mb-4 font-semibold mb-8">
                     Confirm Your Appointment
                   </h2>
-                  <p className="text-sm text-gray-600 mb-8">
+                  {/* <p className="text-sm text-gray-600 mb-8">
                     Slide to confirm your booking with {bookingData.adminName}
-                  </p>
+                  </p> */}
 
                   {/* Slide to Confirm Button */}
                   <div className="relative mb-4">
